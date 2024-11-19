@@ -7,11 +7,8 @@ int main() {
     auto image = std::make_unique<Image>(512, 512);
     std::cout << "Brightening a 512 x 512 image\n";
 
-    // move the ownership of the image to the brightener
-    ImageBrightener brightener(std::move(image));
-
-    if (brightener.ValidateImage()) {
-        int attenuatedCount = brightener.BrightenWholeImage();
+    if (image->IsValid()) {
+        int attenuatedCount = BrightenWholeImage(*image);
         std::cout << "Attenuated " << attenuatedCount << " pixels\n";
 
         // Error... cannot access image here! We still need the ownership here!
